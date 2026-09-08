@@ -31,16 +31,4 @@ export default function Navbar() {
             <Link to="/admin/stores">Stores</Link>
           </>
         )}
-        {user.role === 'normal_user' && <Link to="/stores">Stores</Link>}
-        {user.role === 'store_owner' && <Link to="/owner">My store</Link>}
-        <Link to="/account/password">Password</Link>
-      </nav>
-      <div className="topbar-user">
-        <span>{user.name}</span>
-        <button className="btn btn-secondary btn-sm" onClick={handleLogout}>
-          Log out
-        </button>
-      </div>
-    </header>
-  );
-}
+       

@@ -28,22 +28,6 @@ export default function DataTable({
             ))}
           </tr>
         </thead>
-        <tbody>
-          {rows.length === 0 && (
-            <tr>
-              <td colSpan={columns.length} className="empty-cell">
-                {emptyMessage}
-              </td>
-            </tr>
-          )}
-          {rows.map((row) => (
-            <tr key={row[rowKey]}>
-              {columns.map((col) => (
-                <td key={col.key}>{col.render ? col.render(row) : row[col.key]}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
       </table>
     </div>
   );

@@ -16,3 +16,17 @@ client.interceptors.request.use((config) => {
 // broadcast it so AuthContext can clear the session and let ProtectedRoute
 // send the user back to /login. Login/signup failing with 401 is just a
 // wrong-password response, not a session problem, so those are excluded.
+client.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const status = error.response?.status;
+    const url = error.config?.url || '';
+    const isAuthEndpoint = url.includes('/auth/login') || url.includes('/auth/signup');
+    if (status === 401 && !isAuthEndpoint) {
+      window.dispatchEvent(new CustomEvent('auth:unauthorized'));
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default client;

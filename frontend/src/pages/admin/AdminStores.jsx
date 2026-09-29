@@ -148,4 +148,38 @@ export default function AdminStores() {
         </form>
       )}
 
-   
+      <form className="filter-bar" onSubmit={handleFilterSubmit}>
+        <input
+          className="input"
+          placeholder="Filter by name"
+          value={filters.name}
+          onChange={(e) => setFilters({ ...filters, name: e.target.value })}
+        />
+        <input
+          className="input"
+          placeholder="Filter by email"
+          value={filters.email}
+          onChange={(e) => setFilters({ ...filters, email: e.target.value })}
+        />
+        <input
+          className="input"
+          placeholder="Filter by address"
+          value={filters.address}
+          onChange={(e) => setFilters({ ...filters, address: e.target.value })}
+        />
+        <button className="btn btn-secondary" type="submit">
+          Filter
+        </button>
+      </form>
+
+      <DataTable
+        columns={columns}
+        rows={stores}
+        sortBy={sortBy}
+        order={order}
+        onSort={handleSort}
+        emptyMessage="No stores match those filters."
+      />
+    </div>
+  );
+}

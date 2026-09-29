@@ -105,3 +105,20 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/owner"
+          element={
+            <ProtectedRoute roles={['store_owner']}>
+              <Layout>
+                <OwnerDashboard />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </AuthProvider>
+  );
+}

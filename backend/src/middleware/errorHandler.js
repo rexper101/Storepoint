@@ -8,7 +8,11 @@ function errorHandler(err, req, res, next) {
     return res.status(400).json({ message: err.errors.map((e) => e.message).join(', ') });
   }
 
-  res.status(err.status || 500).json({ message: err.message || 'Internal server error' });
+  const status =
+    Number.isInteger(err.status) && err.status >= 400 && err.status < 600 ? err.status : 500;
+  const message = status < 500 ? err.message || 'Request failed' : 'Internal server error';
+
+  res.status(status).json({ message });
 }
 
 module.exports = errorHandler;

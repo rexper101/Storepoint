@@ -52,8 +52,9 @@ MySQL, install, and startup in one step. Running directly:
    npm install
    ```
 2. Create a MySQL database (or let Sequelize do it — `sql/schema.sql` is there
-   for reference, but `server.js` calls `sequelize.sync({ alter: true })` on
-   startup, which creates/updates the tables from the models automatically).
+  for reference, and development startup calls `sequelize.sync({ alter: true })`
+  to create/update tables from the models automatically. Production startup
+  skips schema sync; apply reviewed database migrations before deploying.
 3. Copy `.env.example` to `.env` and fill in your MySQL credentials and a JWT
    secret:
    ```
